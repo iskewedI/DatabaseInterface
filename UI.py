@@ -35,7 +35,7 @@ def conexionBBDD():
 def guardarRegistroBBDD(cursorX,lista):
 	cursorX.executemany("INSERT INTO VENTAS VALUES (NULL,?,?,?,?,?,?)",lista)
 #SQLITE
-def leerRegistroBBDD():
+def leerRegistroBBDD():  #Reading the database
 	articlesX=sqlite3.connect("art001")
 	cursorX=articlesX.cursor()
 	entrada=filtro.get()
@@ -62,7 +62,7 @@ def leerRegistroBBDD():
 	return listaVentas
 
 #----------------------------------------------
-def clear():
+def clear():  
 	global cantVentas
 	cantVentas=0
 	for widget in mainFrame.winfo_children():
@@ -70,18 +70,19 @@ def clear():
 				continue
 			else:
 				widget.destroy()
-def center_window(width,height):
-	#Obtengo ancho y alto de la pantalla actual
+
+def center_window(width,height): 
+	#Obtengo ancho y alto de la pantalla actual / Get the wide and height from actual screen
 	screen_width = root.winfo_screenwidth()
 	screen_height = root.winfo_screenheight()
 
-	#Calculo las posiciones 
+	#Calculo las posiciones / Estimate the positions
 	x=(screen_width/2) - (width/2)
 	y=(screen_height/2) - (height/2)
 
 	root.geometry(('%dx%d+%d+%d') % (width,height,x,y))
 
-def recibirDatos():
+def recibirDatos():   #Recibe data
 	global ids
 	global cantVentas
 	global filterState
@@ -98,7 +99,7 @@ def recibirDatos():
 		for i in range(0,leng):
 			crearVenta(tupla[i],i)
 
-def crearVenta(tupla,i):
+def crearVenta(tupla,i):  #Create sales and shows it
 	global cantVentas
 	fila=cantVentas+1
 	if i==0:
@@ -125,7 +126,7 @@ def crearVenta(tupla,i):
 		labelPT=Label(mainFrame,text=conSigno,relief='groove',font=('Arial',12),width=5,pady=4,bg='#99EB99')
 		labelPT.grid(row=fila,column=7)
 
-def busquedaFunction():
+def busquedaFunction():   #Search function
 	#Functions---------------------
 	def verResultadosBusqueda(busqueda):
 		#FUNCTIONS-----------------------------------------
@@ -227,10 +228,11 @@ def busquedaFunction():
 	buttonUnSelect=Button(searchTop,text="Dejar de filtrar",command=noBuscar)
 	buttonUnSelect.grid(column=5,row=0,columnspan=1)
     
-def salir():
+def salir():  #Exit
 	root.destroy()	
+
 #ADDTOPS----------------------------------------------------------------------------------------------------
-#ADD TOP INSERT--------------------------------------------------------------------------------
+#ADDTOP 'INSERT'--------------------------------------------------------------------------------
 def addTopIFunction():
 	#SUB FUNCIONES-----------------------------------------
 	def center_windowADDTOP(width=300,height=400):
@@ -363,7 +365,8 @@ def addTopIFunction():
 	comentEntry.bind('<Return>',func)
 	precioUnitEntry.bind('<Return>',func)
 	cantArtEntry.bind('<Return>',func)
-#ADD TOP DELETE--------------------------------------------------------------------------------
+
+#ADDTOP 'DELETE'--------------------------------------------------------------------------------
 def addTopDFunction():
 	global cantVentas
 	#SUBFUNCIONES------------------------------------
@@ -448,7 +451,7 @@ def addTopDFunction():
 
 #ESTADÍSTICAS----------------------------------------------------------------------------------
 @decorate
-def estadisticasFunction(cursorX):
+def estadisticasFunction(cursorX):  #Stadistics
 	#----------------------------------
 	def center_windowEstd(width=300,height=400):
 		#Obtengo ancho y alto de la pantalla actual 			 														
@@ -586,7 +589,7 @@ herramientasMenu.add_command(label="Gráficos")
 
 busquedaMenu.add_command(label="Buscar venta",command=busquedaFunction)
 #---------------------------------------------------------------------
-#Programa principal
+#Programa principal  / Main App
 idButton=Button(mainFrame,text="ID",font=('Helvetica',13),width=5)
 idButton.grid(column=1,row=1,pady=6,padx=2)
 dateButton=Button(mainFrame,text="FECHA",font=('Helvetica',13),width=15)
